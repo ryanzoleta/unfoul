@@ -5,12 +5,15 @@
   import { page } from '$app/stores';
   import NavHeader from '$lib/components/nav-header.svelte';
   import GithubLink from '$lib/components/github-link.svelte';
+  import type Item from '$lib/types/item';
 
   let errorHeader = '';
   let errorDetails = '';
   let allItems = [];
-  let nsfwItems = [];
+  let nsfwItems: Item[] = [];
   let doneRetrieving = false;
+  let purging = false;
+  let purgeCount = 0;
 
   $: nsfwItems = allItems?.filter((item) => {
     return item.isNsfw;
@@ -81,6 +84,30 @@
       });
   }
 
+  async function unsaveAll() {
+    purgeCount = nsfwItems.length;
+    purging = true;
+
+    for (const item of nsfwItems) {
+      await axios.post(
+        `https://oauth.reddit.com/api/unsave`,
+        {},
+        {
+          params: {
+            id: item.id
+          },
+          headers
+        }
+      );
+
+      purgeCount -= 1;
+    }
+
+    purging = false;
+    doneRetrieving = false;
+    retrieveDataFromReddit();
+  }
+
   onMount(async () => {
     const localAllItems = localStorage.getItem('allItems');
 
@@ -119,6 +146,28 @@
             <p>
               Your account is completely <span class="font-bold text-rose-500">pornfree</span> 👍🏼
             </p>
+            <div>
+              <button
+                class="rounded-lg bg-zinc-800 px-5 py-2 text-left text-lg font-bold text-zinc-400 transition duration-300 hover:bg-zinc-700"
+                on:click={retrieveDataFromReddit}>
+                Refresh
+              </button>
+            </div>
+          {:else if purging}
+            <h1 class="text-2xl font-bold">
+              Purging <span class="text-rose-500">{nsfwItems.length}</span> NSFW saved posts in your
+              Reddit account...
+            </h1>
+
+            <div class="flex gap-3">
+              <div>
+                <button
+                  class="rounded-lg bg-zinc-900 px-5 py-2 text-left text-lg font-bold text-zinc-400"
+                  disabled
+                  ><span class="loading loading-spinner loading-sm p-0 align-middle" />
+                  <span class="pl-1 align-middle">{purgeCount} remaining</span></button>
+              </div>
+            </div>
           {:else}
             <h1 class="text-2xl font-bold">
               Found <span class="text-rose-500">{nsfwItems.length}</span> NSFW saved posts in your Reddit
@@ -127,7 +176,10 @@
 
             <div class="flex gap-3">
               <button
-                class="rounded-lg bg-rose-500 px-5 py-2 text-left text-lg font-bold text-rose-100 transition duration-300 hover:bg-rose-400">
+                class="rounded-lg bg-rose-500 px-5 py-2 text-left text-lg font-bold text-rose-100 transition duration-300 hover:bg-rose-400"
+                on:click={() => {
+                  window.confirmation_modal.showModal();
+                }}>
                 Purge them all
               </button>
               <button
@@ -136,7 +188,22 @@
                 Refresh
               </button>
             </div>
-            <p class="text-gray-400">This will unsave all your NSFW saved Reddit posts</p>
+            <p class="text-gray-400">
+              This action cannot be undone and cannot be stopped once started
+            </p>
+            <dialog id="confirmation_modal" class="modal">
+              <form method="dialog" class="modal-box">
+                <h3 class="py-3 text-lg font-bold">Are you sure?</h3>
+                <p class="">This cannot be undone and cannot be stopped once started.</p>
+                <div class="modal-action">
+                  <!-- if there is a button in form, it will close the modal -->
+
+                  <button class="btn">Cancel</button>
+                  <button class="btn bg-rose-500 text-white hover:bg-rose-400" on:click={unsaveAll}
+                    >Continue Purging</button>
+                </div>
+              </form>
+            </dialog>
           {/if}
         </div>
       {:else}
