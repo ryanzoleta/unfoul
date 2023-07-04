@@ -195,9 +195,11 @@
           {/if}
         </div>
       {:else}
-        <div class="mt-10 flex flex-col gap-3">
+        <div class="mt-10 flex flex-col gap-5">
           <p class="text-2xl font-bold">Retrieving your saved list, this might take a while...</p>
-          <p class="text-gray-400">Found {allItems.length} total saved posts so far</p>
+          <p class="text-gray-400">
+            Found {allItems.length} saved posts in your Reddit account
+          </p>
           <div>
             <button
               class="cursor-wait rounded-lg bg-zinc-900 px-5 py-2 text-left text-lg text-zinc-400"

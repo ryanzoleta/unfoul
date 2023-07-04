@@ -25,7 +25,7 @@
 
 <main class="min-h-screen bg-black text-center text-gray-200">
   <div class="flex flex-col place-items-center gap-7 px-10 pt-5 text-left">
-    <div class="md:w-1/2">
+    <div class="w-full md:w-4/12">
       <div class="flex place-content-between">
         <NavHeader />
         <GithubLink />

@@ -20,16 +20,25 @@
   <div class="flex flex-col place-items-center gap-7 px-10 pt-28">
     <NavHeader />
     <p class="text-2xl">
-      Delete all your saved NSFW Reddit posts in one click <span class="text-rose-500">*</span>
+      Make your Reddit account <a
+        href="https://old.reddit.com/r/pornfree/"
+        target="_blank"
+        class="transition duration-300 hover:text-rose-500 hover:underline">porn-free</a>
+      with just one click <span class="text-rose-500">*</span>
     </p>
 
     <a
       href="https://www.reddit.com/api/v1/authorize?client_id={clientId}&response_type=code&state={state}&redirect_uri={redirectUri}&duration=permanent&scope={scopes}"
       class="block w-3/4 rounded-lg bg-rose-600 p-2 text-xl transition duration-300
       hover:bg-rose-500 sm:w-1/2 md:w-4/12 lg:w-3/12">Connect to Reddit</a>
-    <p class="text-lg text-zinc-500">
-      Everything will be done client-side, this app doesn't store your information in a server
-    </p>
+    <div>
+      <p class="w-full text-center text-lg text-zinc-500">
+        Unfoul will un-save all NSFW posts in your Reddit account's saved list.
+      </p>
+      <p class="text-lg text-zinc-500">
+        Everything will be done client-side, this website doesn't store your information in a server
+      </p>
+    </div>
   </div>
   <GithubLink fixed={true} />
 </main>
