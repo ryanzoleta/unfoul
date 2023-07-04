@@ -2,7 +2,7 @@
   export let fixed = false;
 </script>
 
-<a href="/" target="_blank">
+<a href="https://github.com/ryanarnold/unfoul" target="_blank">
   <img
     class="{fixed ? 'fixed right-10 top-5' : ''} w-8"
     src="/images/github.png"
