@@ -3,12 +3,23 @@
   import { onMount } from 'svelte';
   import NavHeader from '$lib/components/nav-header.svelte';
   import GithubLink from '$lib/components/github-link.svelte';
+  import { page } from '$app/stores';
 
   export let data;
 
+  let stateError = false;
+
   onMount(() => {
-    Cookies.set('token', data.token, { sameSite: 'strict', secure: true, expires: 7 });
-    window.location.href = '/app';
+    const state = $page.url.searchParams.get('state');
+
+    const seedState = localStorage.getItem('state');
+
+    if (state !== seedState) {
+      stateError = true;
+    } else {
+      Cookies.set('token', data.token, { sameSite: 'strict', secure: true, expires: 7 });
+      window.location.href = '/app';
+    }
   });
 </script>
 
@@ -19,15 +30,24 @@
         <NavHeader />
         <GithubLink />
       </div>
-      <div class="mt-10">
-        <p class="mb-5 text-2xl font-bold">Authorization successful</p>
-        <p class="text-zinc-300">
-          Please wait, you will be redirected to another page in a short while...
-        </p>
-        <p>
-          <a href="/app" class="text-rose-600 hover:underline">Click here</a> if you are not automatically
-          redirected
-        </p>
+      <div class="mt-10 flex flex-col gap-5">
+        {#if stateError}
+          <p class="text-2xl font-bold">Error</p>
+          <p class="text-zinc-300">There was an issue in the authentication flow</p>
+          <p>
+            Please return to the <a href="/" class="text-rose-600 hover:underline">homepage</a> and reconnect
+            to Reddit
+          </p>
+        {:else}
+          <p class="text-2xl font-bold">Authorization successful</p>
+          <p class="text-zinc-300">
+            Please wait, you will be redirected to another page in a short while...
+          </p>
+          <p>
+            <a href="/app" class="text-rose-600 hover:underline">Click here</a> if you are not automatically
+            redirected
+          </p>
+        {/if}
       </div>
     </div>
   </div>

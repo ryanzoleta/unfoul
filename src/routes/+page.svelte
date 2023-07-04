@@ -1,14 +1,19 @@
 <script lang="ts">
   import GithubLink from '$lib/components/github-link.svelte';
   import NavHeader from '$lib/components/nav-header.svelte';
+  import { onMount } from 'svelte';
   import { v4 as uuidv4 } from 'uuid';
 
   export let data;
 
+  let state;
+
   const { clientId, redirectUri, scopes } = data;
 
-  const state = uuidv4();
-  localStorage.setItem('state', state);
+  onMount(() => {
+    state = uuidv4();
+    localStorage.setItem('state', state);
+  });
 </script>
 
 <main class="min-h-screen bg-black text-center text-gray-200">
