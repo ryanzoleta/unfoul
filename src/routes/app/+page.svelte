@@ -69,8 +69,6 @@
             );
           } while (after && !limitParam);
 
-          localStorage.setItem('allItems', JSON.stringify(allItems));
-
           doneRetrieving = true;
         } catch (e) {
           console.error(e);
@@ -109,14 +107,6 @@
   }
 
   onMount(async () => {
-    const localAllItems = localStorage.getItem('allItems');
-
-    if (localAllItems) {
-      allItems = JSON.parse(localAllItems);
-      doneRetrieving = true;
-      return;
-    }
-
     retrieveDataFromReddit();
   });
 </script>
@@ -196,8 +186,6 @@
                 <h3 class="py-3 text-lg font-bold">Are you sure?</h3>
                 <p class="">This cannot be undone and cannot be stopped once started.</p>
                 <div class="modal-action">
-                  <!-- if there is a button in form, it will close the modal -->
-
                   <button class="btn">Cancel</button>
                   <button class="btn bg-rose-500 text-white hover:bg-rose-400" on:click={unsaveAll}
                     >Continue Purging</button>
@@ -212,7 +200,7 @@
           <p class="text-gray-400">Found {allItems.length} total saved posts so far</p>
           <div>
             <button
-              class="rounded-lg bg-zinc-900 px-5 py-2 text-left text-lg text-zinc-400"
+              class="cursor-wait rounded-lg bg-zinc-900 px-5 py-2 text-left text-lg text-zinc-400"
               disabled
               ><span class="loading loading-spinner loading-sm p-0 align-middle" />
               <span class="pl-1 align-middle">Waiting to finish</span></button>
