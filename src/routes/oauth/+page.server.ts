@@ -1,4 +1,4 @@
-import { REDDIT_API_CLIENT_ID, HOSTNAME, REDDIT_API_CLIENT_SECRET } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 import axios from 'axios';
 import querystring from 'querystring';
 
@@ -13,12 +13,12 @@ export async function load({ url }) {
       querystring.stringify({
         grant_type: 'authorization_code',
         code,
-        redirect_uri: `${HOSTNAME}/oauth`
+        redirect_uri: `${env.HOSTNAME}/oauth`
       }),
       {
         auth: {
-          username: REDDIT_API_CLIENT_ID as string,
-          password: REDDIT_API_CLIENT_SECRET as string
+          username: env.REDDIT_API_CLIENT_ID as string,
+          password: env.REDDIT_API_CLIENT_SECRET as string
         }
       }
     );
