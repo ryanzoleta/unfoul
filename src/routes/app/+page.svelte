@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import Cookies from 'js-cookie';
-  import axios from 'axios';
+  import axios, { AxiosError } from 'axios';
   import { page } from '$app/stores';
   import NavHeader from '$lib/components/nav-header.svelte';
   import GithubLink from '$lib/components/github-link.svelte';
@@ -10,7 +10,7 @@
 
   let errorHeader = '';
   let errorDetails = '';
-  let allItems = [];
+  let allItems: Item[] = [];
   let nsfwItems: Item[] = [];
   let doneRetrieving = false;
   let purging = false;
@@ -56,7 +56,7 @@
 
             allItems = [
               ...allItems,
-              ...children.map((item) => {
+              ...children.map((item: any) => {
                 return {
                   id: item.kind + '_' + item.data.id,
                   isNsfw: item.data.over_18,
@@ -73,8 +73,10 @@
           doneRetrieving = true;
         } catch (e) {
           console.error(e);
-          errorHeader = 'There was an error retrieving saved items';
-          errorDetails = e.message;
+          if (e instanceof AxiosError) {
+            errorHeader = 'There was an error retrieving saved items';
+            errorDetails = e.message;
+          }
         }
       })
       .catch((e) => {
