@@ -16,6 +16,8 @@
   let purging = false;
   let purgeCount = 0;
 
+  let username: string;
+
   $: nsfwItems = allItems?.filter((item) => {
     return item.isNsfw;
   });
@@ -34,7 +36,7 @@
     axios
       .get('https://oauth.reddit.com/api/v1/me', { headers })
       .then(async (response) => {
-        const username = response.data.name;
+        username = response.data.name;
 
         try {
           let after = '';
@@ -116,7 +118,7 @@
 
 <main class="min-h-screen bg-black text-gray-200">
   <div class="flex flex-col place-items-center gap-7 px-10 pt-5 text-left">
-    <div class="w-full md:w-4/12">
+    <div class="w-full md:w-8/12 lg:w-6/12 2xl:w-4/12">
       <div class="flex place-content-between">
         <NavHeader />
         <GithubLink />
@@ -162,9 +164,10 @@
               </div>
             </div>
           {:else}
-            <h1 class="text-2xl font-bold transition-all duration-300">
-              Found <span class="text-rose-500">{nsfwItems.length}</span> NSFW saved posts in your Reddit
-              account
+            <h1 class="text-2xl transition-all duration-300">
+              Found <span class="text-rose-500">{nsfwItems.length}</span> NSFW posts in
+              <strong>u/{username}'s</strong>
+              saved list
             </h1>
 
             <div class="flex gap-3">
@@ -173,7 +176,7 @@
                 on:click={() => {
                   window.confirmation_modal.showModal();
                 }}>
-                Purge them all
+                Un-save them all
               </button>
               <button
                 class="rounded-lg bg-zinc-800 px-5 py-2 text-left text-lg font-bold text-zinc-400 transition duration-300 hover:bg-zinc-700"
@@ -181,17 +184,18 @@
                 Refresh
               </button>
             </div>
-            <p class="text-gray-400">
-              This action cannot be undone and cannot be stopped once started
-            </p>
+            <!-- <p class="text-gray-400"> cannot be undone and cannot be stopped once started</p> -->
             <dialog id="confirmation_modal" class="modal">
               <form method="dialog" class="modal-box">
-                <h3 class="py-3 text-lg font-bold">Are you sure?</h3>
-                <p class="">This cannot be undone and cannot be stopped once started.</p>
+                <h3 class="py-3 text-xl font-bold">Are you sure?</h3>
+                <p class="text-lg">
+                  Un-saving cannot be undone and cannot be stopped once started.
+                </p>
                 <div class="modal-action">
-                  <button class="btn">Cancel</button>
-                  <button class="btn bg-rose-500 text-white hover:bg-rose-400" on:click={unsaveAll}
-                    >Continue Purging</button>
+                  <button class="btn text-lg font-bold capitalize">Cancel</button>
+                  <button
+                    class="btn bg-rose-500 text-lg font-bold capitalize text-white hover:bg-rose-600"
+                    on:click={unsaveAll}>Continue</button>
                 </div>
               </form>
             </dialog>
