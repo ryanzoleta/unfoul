@@ -3,6 +3,7 @@
   import NavHeader from '$lib/components/nav-header.svelte';
   import { onMount } from 'svelte';
   import { v4 as uuidv4 } from 'uuid';
+  import { fade, slide } from 'svelte/transition';
 
   export let data;
 
@@ -30,7 +31,7 @@
     <a
       href="https://www.reddit.com/api/v1/authorize?client_id={clientId}&response_type=code&state={state}&redirect_uri={redirectUri}&duration=permanent&scope={scopes}"
       class="block w-3/4 rounded-lg bg-rose-600 p-2 text-xl transition duration-300
-      hover:bg-rose-500 sm:w-1/2 md:w-4/12 lg:w-3/12">Connect to Reddit</a>
+      hover:bg-rose-700 sm:w-1/2 md:w-4/12 lg:w-3/12">Connect to Reddit</a>
     <div>
       <p class="w-full text-center text-lg text-zinc-500">
         Unfoul will un-save all NSFW posts in your Reddit account's saved list.

@@ -6,6 +6,7 @@
   import NavHeader from '$lib/components/nav-header.svelte';
   import GithubLink from '$lib/components/github-link.svelte';
   import type Item from '$lib/types/item';
+  import { fade, slide } from 'svelte/transition';
 
   let errorHeader = '';
   let errorDetails = '';
@@ -129,7 +130,7 @@
           </p>
         </div>
       {:else if doneRetrieving}
-        <div class="mt-10 flex flex-col gap-7">
+        <div class="mt-10 flex flex-col gap-7" in:fade>
           {#if nsfwItems.length === 0}
             <h1 class="text-4xl font-bold">Congratulations!</h1>
             <p>There are {nsfwItems.length} NSFW saved posts on your Reddit account.</p>
@@ -159,7 +160,7 @@
               </div>
             </div>
           {:else}
-            <h1 class="text-2xl font-bold">
+            <h1 class="text-2xl font-bold transition-all duration-300">
               Found <span class="text-rose-500">{nsfwItems.length}</span> NSFW saved posts in your Reddit
               account
             </h1>
@@ -195,7 +196,7 @@
           {/if}
         </div>
       {:else}
-        <div class="mt-10 flex flex-col gap-5">
+        <div class="mt-10 flex flex-col gap-5" in:fade>
           <p class="text-2xl font-bold">Retrieving your saved list, this might take a while...</p>
           <p class="text-gray-400">
             Found {allItems.length} saved posts in your Reddit account
