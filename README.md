@@ -1,6 +1,6 @@
 <h1 align="center">Unfoul</h1>
 
-**Unfoul** is a simple easy-to-use web app for removing all NSFW content from your Reddit account's saved links.
+**Unfoul** is a simple easy-to-use web app for removing all NSFW content from your Reddit account.
 
 ![unfoul_demo](https://github.com/ryanarnold/unfoul/assets/18186677/70e75df1-185e-46b5-8b30-b3da4ef0b071)
 
@@ -8,7 +8,7 @@
 
 This is a tool I created to help those struggling with porn addiction and have accumulated a huge amount of porn in their Reddit account. This is meant to be an easy, friction-less way to "clean" your Reddit account and help users in their porn-free journey.
 
-Written in Typescript using [SvelteKit](https://kit.svelte.dev/) and [Tailwind CSS](https://tailwindcss.com/)
+Written in Typescript using [SvelteKit](https://kit.svelte.dev/).
 
 ### Features
 
