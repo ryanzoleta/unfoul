@@ -2,9 +2,11 @@
 
 **Unfoul** is a simple easy-to-use web app for removing all NSFW content from your Reddit account' saved list.
 
-This is a tool I created to help those struggling with porn addiction and have accumulated a huge amount of porn in their Reddit account's saved list. This is meant to be an easy, friction-less way to "clean" your Reddit account and help users in their porn-free journey.
+![unfoul_demo](https://github.com/ryanarnold/unfoul/assets/18186677/70e75df1-185e-46b5-8b30-b3da4ef0b071)
 
 **Try it out here: https://unfoul.vercel.app/**
+
+This is a tool I created to help those struggling with porn addiction and have accumulated a huge amount of porn in their Reddit account's saved list. This is meant to be an easy, friction-less way to "clean" your Reddit account and help users in their porn-free journey.
 
 Written in Typescript using [SvelteKit](https://kit.svelte.dev/) and [Tailwind CSS](https://tailwindcss.com/)
 
