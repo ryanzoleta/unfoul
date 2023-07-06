@@ -33,12 +33,11 @@
         class="m:w-1/2 block w-3/4 cursor-wait rounded-lg bg-rose-400 p-2 text-xl md:w-4/12 lg:w-3/12"
         disabled
         ><span class="loading loading-spinner loading-sm mr-2 align-middle" />
-        Redirecting to Reddit...</button>
+        Connect to Reddit</button>
     {:else}
       <a
         href="https://www.reddit.com/api/v1/authorize?client_id={clientId}&response_type=code&state={state}&redirect_uri={redirectUri}&duration=permanent&scope={scopes}"
-        class="block w-3/4 rounded-lg bg-rose-600 p-2 text-xl transition duration-300
-    hover:bg-rose-700 sm:w-1/2 md:w-4/12 lg:w-3/12"
+        class="block w-3/4 rounded-lg bg-rose-600 p-2 text-xl transition duration-300 hover:bg-rose-700 sm:w-1/2 md:w-4/12 lg:w-3/12"
         on:click={() => {
           isConnecting = true;
         }}>Connect to Reddit</a>
