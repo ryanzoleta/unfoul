@@ -15,17 +15,10 @@
   onMount(() => {
     state = uuidv4();
     localStorage.setItem('state', state);
-    isConnecting = false;
   });
-
-  $: if ($navigating) isConnecting = false;
 </script>
 
-<main
-  class="min-h-screen bg-black text-center text-gray-200"
-  on:load={() => {
-    isConnecting = false;
-  }}>
+<main class="min-h-screen bg-black text-center text-gray-200">
   <div class="flex flex-col place-items-center gap-7 px-10 pt-28">
     <NavHeader />
     <p class="text-2xl">
@@ -37,17 +30,19 @@
     </p>
 
     {#if isConnecting}
-      <button
-        class="m:w-1/2 block w-3/4 cursor-wait rounded-lg bg-rose-400 p-2 text-xl md:w-4/12 lg:w-3/12"
-        disabled
+      <button class="m:w-1/2 block cursor-wait rounded-lg bg-rose-400 px-5 py-2 text-xl" disabled
         ><span class="loading loading-spinner loading-sm mr-2 align-middle" />
         Connect to Reddit</button>
     {:else}
       <a
         href="https://www.reddit.com/api/v1/authorize?client_id={clientId}&response_type=code&state={state}&redirect_uri={redirectUri}&duration=permanent&scope={scopes}"
-        class="block w-3/4 rounded-lg bg-rose-600 p-2 text-xl transition duration-300 hover:bg-rose-700 sm:w-1/2 md:w-4/12 lg:w-3/12"
+        class="block rounded-lg bg-rose-600 px-5 py-2 text-xl transition duration-300 hover:bg-rose-700"
         on:click={() => {
           isConnecting = true;
+
+          setTimeout(() => {
+            isConnecting = false;
+          }, 3000);
         }}>Connect to Reddit</a>
     {/if}
 
