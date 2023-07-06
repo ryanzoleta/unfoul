@@ -14,6 +14,7 @@
   onMount(() => {
     state = uuidv4();
     localStorage.setItem('state', state);
+    isConnecting = false;
   });
 </script>
 
