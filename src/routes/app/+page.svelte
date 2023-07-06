@@ -150,14 +150,14 @@
             </div>
           {:else if purging}
             <h1 class="text-2xl font-bold">
-              Purging <span class="text-rose-500">{nsfwItems.length}</span> NSFW saved posts in your
+              Removing <span class="text-rose-500">{nsfwItems.length}</span> NSFW saved posts from your
               Reddit account...
             </h1>
 
             <div class="flex gap-3">
               <div>
                 <button
-                  class="rounded-lg bg-zinc-900 px-5 py-2 text-left text-lg font-bold text-zinc-400"
+                  class="cursor-wait rounded-lg bg-zinc-900 px-5 py-2 text-left text-lg font-bold text-zinc-400"
                   disabled
                   ><span class="loading loading-spinner loading-sm p-0 align-middle" />
                   <span class="pl-1 align-middle">{purgeCount} remaining</span></button>
