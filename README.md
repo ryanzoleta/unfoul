@@ -1,38 +1,21 @@
-# create-svelte
+<h1 align="center">Unfoul</h1>
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+**Unfoul** is a simple easy-to-use web app for removing all NSFW content from your Reddit account' saved list.
 
-## Creating a project
+This is a tool I created to help those struggling with porn addiction and have accumulated a huge amount of porn in their Reddit account's saved list. This is meant to be an easy, friction-less way to "clean" your Reddit account and help users in their porn-free journey.
 
-If you're seeing this, you've probably already done this step. Congrats!
+**Try it out here: https://unfoul.vercel.app/**
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+Written in Typescript using [SvelteKit](https://kit.svelte.dev/) and [Tailwind CSS](https://tailwindcss.com/)
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+### Features
 
-## Developing
+- **Privacy-friendly**: everything (except the OAuth login) is done in the browser. Nothing is stored in a database. I do not have access to your private saved data nor to your OAuth token. If you think there's a privacy or security risk anywhere in the code, feel free to create a GitHub issue.
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+- **Safe For Work**: using this won't expose you to any NSFW content. If you are currently struggling with porn addiction, this will hopefully not trigger any urges.
 
-```bash
-npm run dev
+### Limitations
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+- When accessing users' saved data, Redit imposes a limitation of only retrieving up to 1000 items (this is actually true even in their own web app). So if you have a TON of saved data, it might take more than just 1 click to fully clean your account.
 
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+- Reddit also imposes a rate limit of up to 100 requests per minute on their API. In my testing, I have not yet ran through this problem, but it is possible.
