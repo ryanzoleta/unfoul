@@ -2,7 +2,7 @@
 
 **Unfoul** is a simple easy-to-use web app for removing all NSFW content from your Reddit account.
 
-![unfoul_demo](https://github.com/ryanarnold/unfoul/assets/18186677/70e75df1-185e-46b5-8b30-b3da4ef0b071)
+![CleanShot 2023-07-06 at 23 53 31](https://github.com/ryanzoleta/unfoul/assets/18186677/ba02eaef-c3e0-41ef-ae39-bb2a2c60272e)
 
 **Try it out here: https://unfoul.vercel.app/**
 
