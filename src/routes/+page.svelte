@@ -18,7 +18,11 @@
   });
 </script>
 
-<main class="min-h-screen bg-black text-center text-gray-200">
+<main
+  class="min-h-screen bg-black text-center text-gray-200"
+  on:load={() => {
+    isConnecting = false;
+  }}>
   <div class="flex flex-col place-items-center gap-7 px-10 pt-28">
     <NavHeader />
     <p class="text-2xl">
