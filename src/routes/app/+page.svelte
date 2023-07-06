@@ -134,7 +134,7 @@
           </p>
         </div>
       {:else if doneRetrieving}
-        <div class="mt-10 flex flex-col gap-7" in:fade>
+        <div class="mt-10 flex flex-col gap-5" in:fade>
           {#if nsfwItems.length === 0}
             <h1 class="text-4xl font-bold">Congratulations!</h1>
             <p>There are {nsfwItems.length} NSFW saved posts on your Reddit account.</p>
@@ -164,9 +164,8 @@
               </div>
             </div>
           {:else}
-            <h1 class="text-2xl transition-all duration-300">
-              Found <span class="text-rose-500">{nsfwItems.length}</span> NSFW posts in
-              <strong>u/{username}'s</strong>
+            <h1 class="text-2xl font-bold transition-all duration-300">
+              Found <span class="font-bold text-rose-500">{nsfwItems.length}</span> NSFW posts in your
               saved list
             </h1>
 
