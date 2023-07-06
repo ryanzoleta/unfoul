@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { navigating, page } from '$app/stores';
   import GithubLink from '$lib/components/github-link.svelte';
   import NavHeader from '$lib/components/nav-header.svelte';
   import { onMount } from 'svelte';
@@ -16,6 +17,8 @@
     localStorage.setItem('state', state);
     isConnecting = false;
   });
+
+  $: if ($navigating) isConnecting = false;
 </script>
 
 <main
